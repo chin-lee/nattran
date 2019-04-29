@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package proto;
+
+message Message {
+    enum Type {
+        INVALID = 0;
+        PING = 1;
+        GET_NODE = 2;
+        RETURN_NODE = 3;
+    }
+
+    enum Flags {
+        NONE = 0;
+        REQUEST = 1;
+        REPLY = 2;
+    }
+
+    uint32 id = 1;
+    uint32 type = 2;
+    uint32 flags = 3;
+    bytes payload = 4;
+}
+
+message Endpoint {
+    bytes sockaddr = 1;
+}
+
+message Ping {
+    Endpoint addr = 1;
+}
+
+message GetNode {
+}
+
+message Node {
+    Endpoint addr = 2;
+}
+
+message ReturnNode {
+    repeated Node nodes = 1;
+}
