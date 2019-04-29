@@ -29,7 +29,10 @@ struct SendReq {
     }
 
     uv_buf_t buf() {
-        return uv_buf_t{data, size_t(cbData)};
+		uv_buf_t b;
+		b.base = data;
+		b.len = size_t(cbData);
+		return b;
     }
 
     void release() {

@@ -5,11 +5,11 @@
 #include <string.h>
 
 enum LogSeverity {
-    TRACE, 
-    DEBUG, 
-    INFO, 
-    WARN, 
-    ERROR
+	LOG_SEVERITY_TRACE,
+	LOG_SEVERITY_DEBUG,
+	LOG_SEVERITY_INFO,
+	LOG_SEVERITY_WARN,
+	LOG_SEVERITY_ERROR
 };
 
 class Logger {
@@ -18,19 +18,19 @@ class Logger {
 public:
     Logger(int level, const char* file, int line, const char* func) {
         switch (level) {
-        case TRACE:
+        case LOG_SEVERITY_TRACE:
             m_ss << "TRAC";
             break;
-        case DEBUG:
+        case LOG_SEVERITY_DEBUG:
             m_ss << "DEBG";
             break;
-        case INFO:
+        case LOG_SEVERITY_INFO:
             m_ss << "INFO";
             break;
-        case WARN:
+        case LOG_SEVERITY_WARN:
             m_ss << "WARN";
             break;
-        case ERROR:
+        case LOG_SEVERITY_ERROR:
             m_ss << "ERRO";
             break;
         }
@@ -53,8 +53,8 @@ public:
 #define LOG(LEVEL)                                                            \
     Logger(LEVEL, __FILE__, __LINE__, __FUNCTION__).stream()
 
-#define LOGT LOG(TRACE)
-#define LOGD LOG(DEBUG)
-#define LOGI LOG(INFO)
-#define LOGW LOG(WARN)
-#define LOGE LOG(ERROR)
+#define LOGT LOG(LOG_SEVERITY_TRACE)
+#define LOGD LOG(LOG_SEVERITY_DEBUG)
+#define LOGI LOG(LOG_SEVERITY_INFO)
+#define LOGW LOG(LOG_SEVERITY_WARN)
+#define LOGE LOG(LOG_SEVERITY_ERROR)

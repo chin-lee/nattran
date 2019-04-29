@@ -1,9 +1,15 @@
 cmake_minimum_required(VERSION 3.0)
 project("nat_tran" CXX)
 
-add_compile_options("-g" "-Wall" "-Wextra" "$<$<CONFIG:RELEASE>:-O2>")
-if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    add_compile_options("-stdlib=libc++")
+if(MSVC)
+    add_compile_options("/W4" "$<$<CONFIG:RELEASE>:/O2>" "/wd4100")
+	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
+else()
+    add_compile_options("-g" "-Wall" "-Wextra" "$<$<CONFIG:RELEASE>:-O2>")
+    if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+        add_compile_options("-stdlib=libc++")
+    endif()
 endif()
 
 set(CMAKE_CXX_STANDARD 14)

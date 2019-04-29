@@ -8,7 +8,9 @@
 
 #include "proto/message.pb.h"
 
+#ifndef WIN32
 #include <arpa/inet.h>
+#endif
 
 static const int kGetNodeRetryInternvalMillis = 5000;
 static const int kPingPeerIntervalMillis = 5000;
